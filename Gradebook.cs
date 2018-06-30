@@ -6,11 +6,11 @@ namespace Gradebook
     class Gradebook
     {
         private List<double> grades = new List<double>();
-        public string subjectName { get; set; }
+        public string SubjectName { get; set; }
 
         public Gradebook(string subjectName)
         {
-            this.subjectName = subjectName;
+            SubjectName = subjectName;
         }
 
         public void AddGrade(double grade)
