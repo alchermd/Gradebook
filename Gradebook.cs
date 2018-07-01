@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Gradebook
 {
@@ -18,7 +19,7 @@ namespace Gradebook
 
         public void AddGrade(double grade)
         {
-            if (grade <= MinimumGrade || grade >= MaximumGrade)
+            if (grade < MinimumGrade || grade > MaximumGrade)
             {
                 throw new Exception("Grade out of bounds");
             }
@@ -26,21 +27,24 @@ namespace Gradebook
             grades.Add(grade);
         }
 
-        public double ComputeAverage()
+        public GradeStatistics ComputeStatistics()
         {
-            if (grades.Count > 0)
-            {
-                double sum = 0;
+            return new GradeStatistics(ComputeLowestGrade(), ComputeHighestGrade(), ComputeAverage());
+        }
 
-                foreach (double grade in grades)
-                {
-                    sum += grade;
-                }
+        private double ComputeLowestGrade()
+        {
+            return grades.Min();
+        }
 
-                return sum / grades.Count;
-            }
+        private double ComputeHighestGrade()
+        {
+            return grades.Max();
+        }
 
-            return 0;
+        private double ComputeAverage()
+        {
+            return grades.Average();
         }
     }
 }
